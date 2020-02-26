@@ -1,2 +1,1 @@
-[Pandas](#Pandas)  | [Installation and Setup](#Installation) | [Series](#Series)| [DataFrames](https://py.monadwizard.live/)  | [Working with Text Data](#Text_Data)
-| [MultiIndex](#MultiIndex) | [GroupBy](#GroupBy) | [Merging, Joining, and Concatenating](#Merging_Joining_and_Concatenating) | [Working with Dates and Times](#Dates_and_Times) | [Panels](#Panels) | [Input and Output](#Input_and_Output) | [Visualization](#Visualization) | [Options and Settings](#Options_and_Settings)
+# Comming Soon....
