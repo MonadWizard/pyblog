@@ -14,7 +14,7 @@ pandas নিম্নলিখিত তিনটি ডেটা স্ট্�
 * Panel
 
 | ডেটা স্ট্রাকচার | Dimension(মাত্রা)  | Description  |
-|:------------------------:|:------:|:----------:|
+| ------------------------ | ------ | ---------- |
 | [Series](#Series) | 1 | 1D labeled homogeneous array, sizeimmutable. |
 | [DataFrames](#DataFrames) | 2 | General 2D labeled, size-mutable tabular structure with potentially heterogeneously typed columns. |
 | [Panels](#Panels) | 3 | General 3D labeled, size-mutable array. |
@@ -36,7 +36,7 @@ Pandas এর ব্যবহার হয় :
 
 
 
-# Installation :
+# Installation
 Pandas installation এর সবথেকে সহজ উপাই Anaconda distribution। একটি cross platform distribution যা  data analysis এবং scientific computing এর জন্য ব্যবহার করা হয়।
 
 আমরা anaconda install করে pipline ব্যবহার করে pandas install করব। 
@@ -49,21 +49,21 @@ online এর help নিয়ে খুব তাড়াতাড়ি installation 
 
 
 
-# Series :
+# Series
 আমরা আগেই জেনেছি যে Series একটি আক-মাত্রা বিশিষ্ট labeled array যা যেকোনো data type এর  ডেটা store করতে পারে। আমরা labeled array বলছি , কারন Series এ সকল 1-dimensional data থাকে, এর প্রতিটি data এর axis label গুলোকে index বলা হয়। 
 
 pandas.Series এর syntax <font color="pink"> pandas.Series( data, index, dtype, copy) </font>
 
 
 | parameter number | Parameter name  | Description  |
-|:------------------------:|:------:|:----------:|
+| -------------------- | ------ | ---------- |
 | 1 | data | data takes various forms like ndarray, list, constants. |
 | 2 | index | Index values must be unique and hashable, same length as data. Default np.arrange(n) if no index is passed. |
 | 3 | dtype | dtype is for data type. If None, data type will be inferred. |
 | 4 | copy | Copy data. Default False |
 
 
-### without importing Dataset :
+### without importing Dataset
 
 আমরা List এবং Dictionary ব্যবহার করে series তৈরি করব তারপর data set ব্যবহার করে series তৈরি করব। আমার এর পোস্টটি implementation এ main focus দিয়ে তৈরী । 
 
@@ -89,17 +89,21 @@ import pandas as pd
 s = pd.Series(ice_cream)
 print(s)
 ```
-<font color="pink"> output:
+### output:
 
 |   |    |
-|:------------------------:|:------:|
+|------------------------|------|
 | 0 | chocolate |
 |1  |      vanila|
 |2  |  strawbarry|
 |3  |  Run Raisin|
 dtype: object 
 
-</font>
+
+
+--------
+
+
 
 এইবার numpy এর দ্বারা array তৈরী করে তা একটি series এ রুপান্তর করি।
 এর জন্য numpy কে import করতে হবে, সুবিধার জন্য  <font color="green"> as np</font> define করি। numpy এর <font color="green">arange</font> function, python এর <font color="green">range</font> function এর মত । arange function array তৈরি করে।  np.arange(start, end, difference)
@@ -117,11 +121,11 @@ print("series1", ser)
 print("series2", ser2)
 ```
 
-<font color="pink"> output:
+### output:
 
 series1 
 |   |    |
-|:------------------------:|:------:|
+| ------------- | ------ |
 | 0 | 1 |
 |1  |      2|
 |2  |  3|
@@ -130,13 +134,18 @@ dtype: int32
 
 series2 
 |   |    |
-|:------------------------:|:------:|
+| ---------- | --------- |
 | 1 | 1 |
 |3  |      2|
 |5  |  3|
 |7  |  4|
 dtype: int32 
-</font>
+
+
+
+---------
+
+
 
 
 boolean value ব্যবহার করে ও আমরা series তৈরি করতে পারি।  
@@ -148,16 +157,21 @@ import pandas as pd
 s2 = pd.Series(registration)
 print(s2)
 ```
-<font color="pink"> output:
+### output:
  
 |   |    |
-|:------------------------:|:------:|
+| ------------------------ | ------ |
 | 0 | True |
 |1  | False|
 |2  | True|
 |3  | False|
 dtype: bool 
-</font>
+
+
+
+---------
+
+
 
 
 এখন python এর Dictionary তৈরী করে তা একটা series এ রুপান্তর করি।
@@ -173,15 +187,22 @@ s3 = pd.Series(data)
 
 print(s3)
 ```
-<font color="pink"> output:
+### output:
  
 |   |    |
-|:------------------------:|:------:|
+| ------------------------ | ------ |
 | Aardvark | An animal |
 |Cyan | A color|
 |Nothing | None|
 dtype: bool 
-</font>
+
+
+
+----------
+
+
+
+
 
 এখন আমরা pandas.Series এর কিছু attribute দেখে নেয়। যেমন series এর সব value বা সব index বা series এর datatype.
 
@@ -195,15 +216,20 @@ print(s3.values)
 print(s3.index)
 print(s3.dtype)
 ```
-<font color="pink"> output:
+### output:
  
-['An animal' 'A color' 'None']
+    ['An animal' 'A color' 'None']
 
-Index(['Aardvark', 'Cyan', 'Nothing'], dtype='object')
+    Index(['Aardvark', 'Cyan', 'Nothing'], dtype='object')
 
-object
+    object
 
-</font>
+
+---------
+
+
+
+
 
 pandas excel এর মত total calculation করতে পারে।defaultly সব calculation value নিয়ে ঘটে। আমরা বিশেষ কিছু method দেখব। 
 sum() function দ্বারা total যোগফল বাহির করা যায়। 
@@ -222,19 +248,19 @@ print(ser.mean())
 print(ser.min())
 print(ser.max())
 ```
-<font color="pink"> output:
+### output:
  
-10
+    10
+    24
+    2.5
+    1
+    4
 
-24
 
-2.5
 
-1
 
-4
+---------
 
-</font>
 
 
 
@@ -266,10 +292,10 @@ print(s5,"\n")
 print(s6,"\n")
 ```
 
-<font color="pink"> output:
+### output:
  
 |   |    |
-|:------------------------:|:------:|
+| ------------------------ | ------ |
 | 4 | chocolate |
 |115 | vanila |
 |23 | strawbarry|
@@ -279,7 +305,7 @@ dtype: object
 ---
 
 |   |    |
-|:------------------------:|:------:|
+| ------------------------ | ------ |
 | True | 4 |
 |False | 115 |
 |True | 23 |
@@ -289,17 +315,23 @@ dtype: int64
 ---
 
 |   |    |
-|:------------------------:|:------:|
+| ------------------------ | ------ |
 | Aardvark | True |
 | Banana | False |
 |Cyan | True |
 |Nothing | False |
 dtype: bool 
-</font>
 
 
 
-### with importing Dataset :
+
+
+-----------
+
+
+
+
+### with importing Dataset
 
 pandas.Series এর এই অংশতে আমরা .csv file include করে তা থেকে series তৈরি করবো।
 pandas library তে pandas.read_csv দ্বারা csv ফাইল directory থেকে read করা হয়। 
@@ -307,15 +339,15 @@ pandas library তে pandas.read_csv দ্বারা csv ফাইল direct
 read_csv এর প্রায় ৪৯ টির মত parameter আছে। এর মধ্যে filepath_or_buffer তা major.অন্য parameter গুল প্রয়োজন হইলে ব্যবহার করতে হয়। 
 
 dataset টি source code এর একই path এ থাকলে just dataset টির নাম উল্লেখ করলেই pandas read করতে পারবে। এর যদি dataset টি অন্য path এ থাকে বা net থেকে read করতে হয় তবে একটু বেশি কষ্ট করতে হবে। 
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-................................
 
-আমরা [বেতন](#বেতন) এবং [salary](#salary) ২ টি demo dataset ব্যবহার করবো। আপনারা অবশ্যয় dataset ২ টি download করে নিজারা try করবেন।
+আমরা Beton এবং Salary ২ টি demo dataset ব্যবহার করবো। আপনারা অবশ্যয় dataset ২ টি download করে নিজারা try করবেন।
+
+[DOWNLOAD](https://github.com/dust-nk-org/pandasDataSet/archive/master.zip)
 
 যদি code এ কোন update করতে না ইত্তছে করে তা হইলে যে directory তে .py file create করেছেন .csv ফাইল download করে same directory তে রাখুন। 
 
-## .read_csv() :
+## .read_csv()
 সবার প্রথম pandas import করে নেয়। এখন read_csv এর দ্বারা dataset ফাইল থেকে variable এ store করি। 
 for a basic purpose আমরা read_csv ar ২ টা parameter ব্যবহার করবো। file path এবং use colunms.
 এখন টা হইলে আমরা dataset থেকে data read করি।
@@ -336,15 +368,12 @@ print("beton: ", type(beton))
 print("beton2: "type(beton2))
 ```
 
-<font color="pink"> output:
+### output:
 
-```salary: ```<class 'pandas.core.frame.DataFrame'>
+    salary: <class 'pandas.core.frame.DataFrame'>
+    beton: <class 'pandas.core.series.Series'>
+    beton2: <class 'pandas.core.frame.DataFrame'> 
 
-```beton: ```<class 'pandas.core.series.Series'>
-
-```beton2: ```<class 'pandas.core.frame.DataFrame'> 
-
-</font>
 
 আমরা <font color="green">usecols</font> parameter এ dataset এর যে সব columns use করবো সেই সব columns এর নাম উল্লেখ করবো। data set এর heading এ যে নাম আসে same নাম দিতে হবে।pandas এ csv file কে mainly DataFrame এ  নিয়ে কাজ করা হয়। 
 
@@ -352,7 +381,7 @@ print("beton2: "type(beton2))
 আমরা চাইলে columns গুলোকে আগে বা পিছে নিতে পারি। মানে columns এর position change করতে পারি। <font color="green">pd.read_csv("path", usecols=["col1","col2"])</font> এই তার দ্বারা আমাদের dataset read complete.এখন আমাদের value তে col1 এর পর col2 এই structured এ ডাটা store হয়েছে। শেষ এ restructered define করতে পারি। [["col2","col1"]] এখন<font color="green">pd.read_csv("path", usecols=["col1","col2"])[["col2","col1"]]</font> দ্বারা col2 এর পর col1 এই structured এ ডাটা store হবে। 
 
 
-## .head() :
+## .head()
 .head() এর দ্বারা defaultly প্রথম ৫ টা row এর ডাটা দেখতে পারা যায়। বিশাল dataset এর overview নিতে চাইলেও যদি সম্পূর্ণ dataset print করা হয় তা হইলে ব্যাপারটা যেমন সময় সাপেক্ষ তেমনই তার জন্য memory আর execution এ problem হয়। dataset এর sort overview নিতে তাই .head() ব্যবহার করা হয়। .head() এ যত number define করা হয় সেই কয়টা row print হয়। 
 
 ```python
@@ -363,10 +392,10 @@ print(beton2.head(),"\n\n")
 print(beton2.head(3))
 
 ```
-<font color="pink"> output:
+### output:
  
 | |YearsExperience   |   Salary |
-|:---------:|-----------:|:------:|
+| --------- | ----------- | ------ |
 | 0 | 1.1 | 39343.0 |
 |1 | 1.3 | 46205.0 |
 |2 | 1.5| 37731.0 |
@@ -376,15 +405,14 @@ print(beton2.head(3))
 ---
 
 | |YearsExperience   |   Salary |
-|:---------:|-----------:|:------:|
+| --------- | ----------- | ------ |
 | 0 | 1.1 | 39343.0 |
 |1 | 1.3 | 46205.0 |
 |2 | 1.5 | 37731.0 |
 
-</font>
 
 
-## .tail() :
+## .tail()
 .head() যেমন প্রথম data গুলো দেখায় .tail() তেমনই শেষ data গুলো দেখায়। 
 
 output নিজেরাই try করে দেখুন। 
@@ -429,7 +457,7 @@ print(min(beton2))        # minimum number
 
 ```
 
-## .is_unique :
+## .is_unique
 dataset এ duplicate value আসে কি না। বা dataset এ একই কোন value  এক এর অধিক  আসছে কি না তা check করতে <font color="green">.is_unique</font> ব্যবহার করা হয়।
 
 .is_unique এর output booolen type হয়ে থাকে। যদি True হয় তবে কোন duplicate value নেই। আর যদি output টা False হয় তা হইলে duplicate value আছে । 
@@ -440,10 +468,10 @@ beton = pd.read_csv("Beton.csv", usecols = ["Salary"], squeeze = True)  #squeeze
 
 print(beton.is_unique) # boolen compare unique value
 ```
-<font color="pink"> output:
+### output:
 
-```True: ```
-</font>
+    True
+
 
 .is_unique function টি series এ কাজ করে। dataFrame এ কাজ করে না। তাই নিচের code টায় error আসবে। 
 
@@ -453,14 +481,13 @@ beton2 = pd.read_csv("Beton.csv")
 
 print(beton2.is_unique) # boolen compare unique value
 ```
-<font color="pink"> output:
+### output :
 
-```AttributeError: ```'DataFrame' object has no attribute 'is_unique'
-</font>
-
+    AttributeError: 'DataFrame' object has no attribute 'is_unique'
 
 
-## .ndim :
+
+## .ndim
 আমরা জানি series 1-Dimention আর DataFrame 2-Dimention. আমরা <font color="green">.ndim</font> এর দ্বারা dataset টা Series না কি DataFrame তা বঝতে পারা যায়। যদি output 1 হয় তবে 1-Dimention বা Series. আর যদি output 2 হয় তবে 2-Dimention বা DataFrame.
 
 
@@ -474,16 +501,14 @@ beton2 = pd.read_csv("Beton.csv")
 print(beton.ndim)
 print(beton2.ndim)
 ```
-<font color="pink"> output:
+### output :
 
-```1 ```
+    1 
+    2 
 
-```2 ```
-</font>
+-----
 
-
-
-## .shape :
+## .shape
 dataset এ কত গুলো rows আর columns আছে তা <font color="green">.shape</font> এর দ্বারা বাহির করা যায়। output এ <font color="gray">(rows, columns)</font> এই রুপে দেখা যায়। 
 
 
@@ -497,15 +522,14 @@ beton2 = pd.read_csv("Beton.csv")
 print(beton.shape)   # represent (row,column)
 print(beton2.shape)
 ```
-<font color="pink"> output:
+### output:
 
-```(30,) ```
+    (30,)
+    (30, 2)
 
-```(30, 2) ```
-</font>
+-----
 
-
-## .size :
+## .size
 dataset এ null সহ total কতগুল value আছে  তা <font color="green">.size</font> এর দ্বারা দেখা যায়। output এ সব row এবং column এর total value count এর মান  numeric এ দেখা যায়। 
 
 ```python
@@ -518,16 +542,15 @@ beton2 = pd.read_csv("Beton.csv")
 print(beton.size)   # # total value include null
 print(beton2.size)
 ```
-<font color="pink"> output:
+### output:
 
-```30 ```
+    30
+    60 
 
-```60 ```
-</font>
+------
 
 
-
-## .sort_values() :
+## .sort_values()
 যদি কখনো dataset এর value sort করে দেখতে হয় মানে ascending order বা descending order এ নিতে হয় তবে <font color="green">.sort_values()</font> ব্যবহার করে তা করা যায়। defaultly ascending parameter টা True থাকে। 
 
 ```python
@@ -542,10 +565,10 @@ print(beton2.sort_values("Salary").head(4),'\n')   # ascending ordered
 print(beton.sort_values().head(4),'\n')   # ascending ordered
 print(beton.sort_values(ascending = False).tail(3))     # descending ordered
 ```
-<font color="pink"> output:
+### output:
  
 | |YearsExperience   |   Salary |
-|:---------:|-----------:|:------:|
+| --------- | ----------- | ------ |
 |2 | 1.5 | 37731.0 |
 |0 | 1.1 | 39343.0 |
 |4 | 2.2| 39891.0 |
@@ -555,7 +578,7 @@ print(beton.sort_values(ascending = False).tail(3))     # descending ordered
 ---
 
 |   |   |
-|-----------:|:------:|
+| ----------- | ------ |
 | 2 | 37731.0 |
 | 0 | 39343.0 |
 | 4 | 39891.0 |
@@ -566,18 +589,18 @@ Name: Salary, dtype: float64
 ---
 
 |   |   |
-|-----------:|:------:|
+| ----------- | ------ |
 | 4 | 39891.0 |
 | 0 | 39343.0 |
 | 2 | 37731.0 |
 
 Name: Salary, dtype: float64
-</font>
 
 
+-----
 
 
-## inplace Parameter :
+## inplace Parameter
 আমরা সবাই জানি যে যদি variable এ কোন operation ঘটে তাহলে আমাদের main data-set এ কোন change ঘটবে না। কিন্তু inplace Parameter ব্যবহার করে আমরা instandly variable এর change বা execution এর change টা কে data-set এর real-value তেও change ঘটাতে পারি। by-Defaultly <font color="green"> inplace = False </font> থাকে।
 
 ```python
@@ -589,10 +612,10 @@ print(salary2)
 print(salary2.sort_values(ascending = False, inplace = True))
 print(salary2)
 ```
-<font color="pink"> output:
+### output:
  
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |0 | 72000.0 |
 |1 | 48000.0 |
 |2 | 54000.0|
@@ -610,7 +633,7 @@ None
 ---
 
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |8 | 83000.0 |
 |7 | 79000.0 |
 |0 | 72000.0 |
@@ -623,11 +646,12 @@ None
 |4 | NaN |
 
 Name: Salary, dtype: float64
-</font>
 
 
+----
 
-## .sort_index() :
+
+## .sort_index()
 sort_index() টা অনেকটা sort_values() এর মত। sort_index() দ্বারা data-set এর index কে ascending বা deascending order এ sort করা যায়।  
 
 ```python
@@ -641,10 +665,10 @@ print(salary2)
 
 ```
 
-<font color="pink"> output:
+### output:
  
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |0 | 72000.0 |
 |1 | 48000.0 |
 |2 | 54000.0|
@@ -662,7 +686,7 @@ None
 ---
 
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |9 | 67000.0 |
 |8 | 83000.0 |
 |7 | 79000.0 |
@@ -675,11 +699,12 @@ None
 |0 | 72000.0 |
 
 Name: Salary, dtype: float64
-</font>
 
 
+------
 
-## in :
+
+## in
 data-set এ কাঙ্ক্ষিত data আছে কি নাই টা  <font color="green"> in </font> ব্যবহার করে check করে নিতে পারেন। যদি data টি data-set এ থেকে থাকে তা হইলে output <font color="pink"> True </font> এর যদি না থাকে তা হইলে output <font color="pink"> False </font>আসবে।  
 
 ```python
@@ -692,10 +717,10 @@ print(67000.0 in salary2)
 print(67000.0 in salary2.values)
 print(2 in salary2)
 ```
-<font color="pink"> output:
+### output:
  
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |0 | 72000.0 |
 |1 | 48000.0 |
 |2 | 54000.0|
@@ -710,15 +735,18 @@ print(2 in salary2)
 Name: Salary, dtype: float64
 
 ||
-|:---:|
+| --- |
 |False|
 |True|
 |True|
 
-</font>
 
 
-## index_col parameter :
+------
+
+
+
+## index_col parameter
 এতক্ষণ আমরা default index নিয়ে কাজ করছি but এখন আমরা দেখব কেমন করে data-set এর একটি column কে index এ রূপান্তর করা যায়। এর জন্য pd.read_csv তে একটা extra parmeter ব্যবহার করতে হবে output <font color="green"> index_col = "column এর নাম" </font>
 
 ```python
@@ -726,11 +754,11 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy)
 ```
-<font color="pink"> output:
+### output:
 
  Salary
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
  | 72000.0|44.0 |
  | 48000.0|27.0 |
  | 54000.0|30.0 |
@@ -743,10 +771,13 @@ print(salaryy)
  | 67000.0|37.0 |
 
 Name: Age, dtype: float64
-</font>
 
 
-## .get() :
+------
+
+
+
+## .get()
 
 <font color="green"> .get() </font> ব্যবহার করে আমরা data-set এর index define করে উক্ত index এর value পেতে পারি। but যদি আমরা এমন কোন index define করি যা data-set এ নাই, তা হইলে আমরা error face করব। তাই .get() এ default parameter ব্যবহার করব।<font color="green"> .get() </font> এ ২টা parameter: key, default. <font color="green"> key= "columns name" </font> আর <font color="green"> default="data না পাইলে যে কোন কিছু comment" </font> দিতে পারেন, যা error এর পরিবর্তে যদি data না থাকে তবে দেখতে পাবেন। 
 
@@ -761,11 +792,11 @@ print(salaryy.get(key = 200 , default = "This is not a salary"),"\n")
 
 
 ```
-<font color="pink"> output:
+### output:
 
  Salary
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
  | 72000.0|44.0 |
  | 48000.0|27.0 |
  | 54000.0|30.0 |
@@ -779,24 +810,24 @@ print(salaryy.get(key = 200 , default = "This is not a salary"),"\n")
 
 Name: Age, dtype: float64
 
----
+------
+
  Salary
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
  | 61000.0|38.0 |
  | 52000.0|NaN |
 Name: Age, dtype: float64 
-
----
 
 This is not a salary 
 
 
 
-</font>
+------
 
 
-## Math Methods :
+
+## Math Methods 
 
 <font color="green"> dataseries.count() </font>: total কতগুলো data বা row আছে তা .count() এর দ্বারা দেখতে পারা যায়। NaN বা blank data .count() এ count করে না।
 
@@ -807,10 +838,12 @@ salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Sala
 print(salaryy.count())
 
 ```
-<font color="pink"> output:
+### output:
 
-9
-</font>
+    9
+
+-------
+
 
 <font color="green"> len(dataseries) </font>: len(series) method টা অনেকটা .count() এর similar,কিন্তু len() NaN বা blank data সহ সমস্ত data এর length count করে। 
 
@@ -821,26 +854,30 @@ salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Sala
 print(len(salaryy))
 
 ```
-<font color="pink"> output:
+### output:
 
-10
-</font>
-
+    10
 
 
+------
+  
 
-<font color="green"> dataseries.sum() </font>:  dataseries এর data যদি numeric হয় তা হইলে আমরা .sum() ব্যবহার করে total যোগফল বাহির করতে পারি। 
+
+<font color="green"> dataseries.sum()</font> :  dataseries এর data যদি numeric হয় তা হইলে আমরা .sum() ব্যবহার করে total যোগফল বাহির করতে পারি। 
+
 ```python
 
 import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.sum())
-
 ```
-<font color="pink"> output:
 
-349.0
-</font>
+### output:
+
+    349.0
+
+
+------
 
 
 <font color="green"> dataseries.mean() </font>: dataseries এর data যদি numeric হয় তা হইলে আমরা .mean() ব্যবহার করে total data এর গড় বাহির করতে পারি।
@@ -851,10 +888,12 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.mean())
 ```
-<font color="pink"> output:
+### output:
 
-38.77777777777778
-</font>
+    38.77777777777778
+
+
+------
 
 
 
@@ -866,11 +905,12 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.std())
 ```
-<font color="pink"> output:
+### output:
 
-7.693792591722527
-</font>
+    7.693792591722527
 
+
+-------
 
 
 
@@ -882,11 +922,12 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.min())
 ```
-<font color="pink"> output:
+### output:
 
-27.0
-</font>
+    27.0
 
+
+-------
 
 
 
@@ -899,10 +940,13 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.max())
 ```
-<font color="pink"> output:
+### output:
 
-50.0
-</font>
+    50.0
+
+
+
+-------
 
 
 
@@ -916,10 +960,14 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.median()) # give mid point value 
 ```
-<font color="pink"> output:
+### output:
 
-38.0
-</font>
+    38.0
+
+
+
+
+-------
 
 
 
@@ -932,10 +980,10 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.mode())
 ```
-<font color="pink"> output:
+### output:
 
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |0 | 27.0 |
 |1 | 30.0 |
 |2 | 35.0|
@@ -947,7 +995,10 @@ print(salaryy.mode())
 |8 | 50.0 |
 
 dtype: float64
-</font>
+
+
+
+-------
 
 
 
@@ -960,10 +1011,10 @@ import pandas as pd
 salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Salary"] , squeeze = True)
 print(salaryy.describe())
 ```
-<font color="pink"> output:
+### output:
 
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |count | 9.000000|
 |mean | 38.777778|
 |std | 7.693793|
@@ -974,7 +1025,11 @@ print(salaryy.describe())
 |max | 50.000000|
 
 Name: Age, dtype: float64
-</font>
+
+
+
+
+--------
 
 
 
@@ -994,16 +1049,16 @@ print(salaryy[83000.0])  #2
 print(salaryy[salaryy.idxmin()])  # together 2[1]
 
 ```
-<font color="pink"> output:
+### output:
 
-50.0
+    50.0
+    83000.0
+    50.0
+    27.0
 
-83000.0
 
-50.0
 
-27.0
-</font>
+---------
 
 
 
@@ -1021,10 +1076,10 @@ print(salaryy.value_counts().sum())
 print(salaryy.count())  # same as sum of value_counts()
 ```
 
-<font color="pink"> output:
+### output:
 
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
 |37.0 | 1 |
 |50.0 | 1 |
 |48.0 | 1|
@@ -1037,10 +1092,13 @@ print(salaryy.count())  # same as sum of value_counts()
 
 Name: Age, dtype: int64
 
-9
+    9
+    9
 
-9
-</font>
+
+-------
+
+
 
 
 ## .apply() :
@@ -1053,11 +1111,11 @@ salaryy = pd.read_csv("salary.csv", index_col = "Salary", usecols = ["Age","Sala
 salaryy.apply(lambda age : age * 100)
 ```
 
-<font color="pink"> output:
+### output:
 
  Salary
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
  | 72000.0|4400.0 |
  | 48000.0|2700.0 |
  | 54000.0|3000.0 |
@@ -1070,8 +1128,10 @@ salaryy.apply(lambda age : age * 100)
  | 67000.0|3700.0 |
 
 Name: Age, dtype: float64
-</font>
 
+
+
+-------
 
 
 
@@ -1088,11 +1148,11 @@ age = pd.read_csv("salary.csv", index_col = "Age", usecols = ["Age","Salary"] , 
 print(age.map(salary))
 ```
 
-<font color="pink"> output:
+### output:
 
 Age
 | |   |
-|:---------:|-----------:|
+| --------- | ----------- |
  | 44.0|44.0 |
  | 27.0 |27.0 |
  | 30.0 |30.0 |
@@ -1105,14 +1165,12 @@ Age
  | 37.0|37.0 |
 
 Name: Salary, dtype: float64
-</font>
 
 
 
 
+-----
 
-
-
-
+-------
 
 
