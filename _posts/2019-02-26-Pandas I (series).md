@@ -216,6 +216,7 @@ print(s3)
 | Aardvark | An animal |
 |Cyan | A color|
 |Nothing | None|
+
 dtype: bool 
 
 
@@ -938,6 +939,7 @@ Name: Age, dtype: float64
 | --------- | ----------- |
  | 61000.0|38.0 |
  | 52000.0|NaN |
+ 
 Name: Age, dtype: float64 
 
 This is not a salary 
