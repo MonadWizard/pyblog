@@ -1,4 +1,4 @@
-# ` DataFrame `
+#  DataFrame 
 
 DataFrame একটি table বা 2D-array জাতীয় কাঠামো, যাতে প্রতিটি কলামে একটি variable এর মান থাকে এবং বেশ কিছু row তে প্রতিটি column থেকে মানগুলির একটি set থাকে। 
 
@@ -14,7 +14,7 @@ Data হল তথ্যের স্বতন্ত্র টুকরো য�
 আমরা <font color="green"> Churn_Modelling.csv </font> data-set ব্যবহার করব। 
 আমরা data-frame এর columns এবং row এর details pandas এর দ্বারা দেখতে পারি। যা আমাদের prediction এ অনেক কাজ এ লাগতে পারে। big-data এর visualization অনেক সময় সাপেক্ষ আবার অনেক সময় সম্ভব হয় না। তাই আমরা Pandas এর কিছু function ব্যবহার করে সমস্ত data-frame এর সম্পর্কে জানতে পারি। এখন এই সব Shared Method এবং attributes এর সম্পর্কে দেখি। 
 
-## ` Shared Methods and Attributes `
+##  Shared Methods and Attributes 
 
 <font color="green"> dataframe.columns </font> ব্যবহার করে আমরা সকল columns এর নাম দেখতে পারি। 
 
@@ -27,7 +27,7 @@ print("display all columns:\t", cm.columns,"\n")
 
 ```
 
-### output:
+### `output`:
 
 
     display all columns:     Index(['RowNumber', 'CustomerId', 'Surname', 'CreditScore', 'Geography','Gender', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary', 'Exited'],dtype='object') 
@@ -50,7 +50,7 @@ print("display all index:\t", cm.index,"\n")
 
 ```
 
-### output:
+### `output`:
 
 
     display all index:       RangeIndex(start=0, stop=10000, step=1) 
@@ -75,7 +75,7 @@ print("total columns length:\t", len(cm.columns),"\n")
 
 ```
 
-### output:
+### `output`:
 
 
     total index length:      10000 
@@ -101,7 +101,7 @@ print("Rows, Columns:\t", cm.shape)
 
 ```
 
-### output:
+### `output`:
 
 
     Rows, Columns:   (10000, 14)
@@ -128,7 +128,7 @@ print("DataType:\n", cm.dtypes)
 ```
 
 
-### output:
+### `output`:
 
 DataType:
 
@@ -171,7 +171,7 @@ print("Rows, Columns:\n", cm.axes)   # RangeIndex is  row , Index([colunms]) is 
 ```
 
 
-### output:
+### `output`:
 
     Rows, Columns:
     [RangeIndex(start=0, stop=10000, step=1), Index(['RowNumber', 'CustomerId', 'Surname', 'CreditScore', 'Geography', 'Gender', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary', 'Exited'],
@@ -199,7 +199,7 @@ print("Summery:\n", cm.info())  # most usefull......
 ```
 
 
-### output:
+### `output`:
 
 DataType:
 
@@ -247,7 +247,7 @@ print(cm.sum(0)) # 0 means row
 ```
 
 
-### output:
+### `output`:
 
 |  |   |
 |-----------|---------
@@ -288,7 +288,7 @@ print(cm.sum(1)) # 1 means column
 ```
 
 
-### output:
+### `output`:
 
 |   |    |
 |-----------|---------
@@ -327,7 +327,7 @@ print(cm["Balance"].head())
 ```
 
 
-### output:
+### `output`:
 
 |   |    |
 |-----------|---------
@@ -362,7 +362,7 @@ print(type(cm["Balance"]))
 
 ```
 
-### output:
+### `output`:
 ```
     <class 'pandas.core.series.Series'>
 
@@ -384,7 +384,7 @@ print(type(cm[["Surname","Balance"]]))
 ```
 
 
-### output:
+### `output`:
 
 |  | Surname  | Balance   |
 |-----------|---------|------|
@@ -420,7 +420,7 @@ print(cm)
 ```
 
 
-### output:
+### `output`:
 
 
 |  | RowNumber  | CustomerId   | ... | Exited | new_row |
@@ -450,7 +450,7 @@ print(cm)
 ---- 
 
 
-### ` Broadcasting Operations : `
+##  Broadcasting Operations : 
 
 Data-preprocessing এ অনেক সময় column এর সমস্ত value একটি specific মান দ্বারা "operation(+-*/)" calculation করতে হয়। তাই কোন column এর সব value update করতে আমরা List ব্যবহার করতে পারি। <font color="green"> dataframe[column_name].operation(value
 ) </font> অথবা  <font color="green"> dataframe[column_name]+-*/ value  </font> ব্যবহার করতে পারি।
@@ -487,7 +487,7 @@ print(cm.head())
 ```
 
 
-### output:
+### `output`:
 
 for add 10 : 
 
@@ -502,12 +502,12 @@ for add 10 :
 
 Name: CustomerId, dtype: int64
 
-একটা output দেখানো হল। বাকি গুলো try করলেই দেখতে এবং বুঝতে পারবেন। 
+একটা `output` দেখানো হল। বাকি গুলো try করলেই দেখতে এবং বুঝতে পারবেন। 
 
 ----- 
 
 
-### ` .value_counts() `
+##  .value_counts() 
 একটি column এ কত রকমের এবং কতগুলো value আছে তা <font color="green"> dataframe[column_name].value_counts() </font> এর দ্বারা জানতে পারা যায়। 
 
 ```python
@@ -520,7 +520,7 @@ print(cm["Gender"].value_counts())
 ```
 
 
-### output:
+### `output`:
 
 ```
 
@@ -531,14 +531,14 @@ print(cm["Gender"].value_counts())
 ```
 Name: CustomerId, dtype: int64
 
-একটা output দেখানো হল। বাকি গুলো try করলেই দেখতে এবং বুঝতে পারবেন। 
+একটা `output` দেখানো হল। বাকি গুলো try করলেই দেখতে এবং বুঝতে পারবেন। 
 
 
 ------------ 
 
 
 
-## ` .dropna() `
+##  .dropna() 
 
 ### Drop Rows with Null Values
 
@@ -585,7 +585,7 @@ print(salary.dropna(axis = 1)) # remove full Column if any null values happend
 ```
 
 
-### output:
+### `output`:
 
 ```
 
@@ -598,7 +598,7 @@ print(salary.dropna(axis = 1)) # remove full Column if any null values happend
 
 
 
-## ` .fillna() `
+##  .fillna() 
 
 
 ### Fill Null Values with the .fillna() method
@@ -632,7 +632,7 @@ print(salary["Salary"].fillna(value = "Here we found null value", inplace = Fals
 
 
 
-## ` .astype() method `
+##  .astype() method 
 
 আমরা যদি data-set এর কোন column এর data এর data-type পরিবর্তন করতে চাই তা হইলে <font color="green"> dataFrame["columnName"].astype("int") </font> দ্বারা data type পরিবর্তন করতে পারি। বি:দ্র: column টার data অবশ্যয় numerical data হইতে হবে। 
 
@@ -652,7 +652,7 @@ print(salary["new"])
 
 
 
-##  ` .numique() method `
+##   .numique() method 
 
 <font color="green"> dataFrame["column"].nunique() </font>
 দ্বারা কোন data-set এর specific column এ total কতরকম এর data আছে টা জানা যায়। 
@@ -674,7 +674,7 @@ print(salary["Purchased"].nunique())
 ```
 
 
-### output:
+### `output`:
 
 ```
 
@@ -687,7 +687,7 @@ print(salary["Purchased"].nunique())
 
 
 
-###  ` reduse memory space by change .astype() `
+##   reduse memory space by change .astype() 
 
 আমরা .astype() এর সঙ্ঘে আগেই পরিচিত হইছি। .astype() ব্যবহার করে memory space কমানো যায়। .info() এর সঙ্ঘে আমরা অনেক আগে থেকে পরিচিত। এখন দেখব .astype() ব্যবহার করে data type পরিবর্তন করাতে .info() তে memory space অনেকটা কমেছে । 
 
@@ -722,7 +722,7 @@ print(salary.info())
 ```
 
 
-### output:
+### `output`:
 
 ```
 
@@ -749,7 +749,7 @@ print(salary.info())
 
 
 
-###  ` .sort_value()  method `
+##   .sort_value()  method 
 
 আমরা যদি কোন columns এর referance এ সম্পূর্ণ data-frame কে sort করতে চাই বা যদি নির্দিষ্ট কোন columns এর data sort করে use করতে চাই তা হলে <font color="green"> data-frame.sort_values("columnName") </font> ব্যবহার করা যায়। defaultly <font color="pink">ascending = True</font>থাকে। real data-frame এর কোন পরিবর্তন হয় না টাই এই method টাই inplace parameter ব্যবহার করতে হয়। 
 
@@ -775,7 +775,7 @@ print(salary.sort_values("Country", na_position = "first"))  # or na_position = 
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -788,7 +788,7 @@ print(salary.sort_values("Country", na_position = "first"))  # or na_position = 
 ------------
 
 
-###  ` .to_dateTime method: `
+##   .to_dateTime method: 
 
 pandas library দ্বারা dataframe কে date-time অনুসারে formating করা যায়। আমরা চাইলে যে কোন columns এর data এর সঙ্গে date-time formate করতে পারি। code a comment দ্বারা script এর workflow দাওয়া হয়েছে। 
 আমরা pandas এর default paramenter <font color="green"> parse_dates </font> ব্যবহার করে ও same কাজ করতে পারি। 
@@ -814,7 +814,7 @@ print(df)
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -824,7 +824,7 @@ print(df)
 ```
 
 
-### ` reduse memory using .astype() `
+##  reduse memory using .astype() 
 
 আমরা <font color="green"> .astype() </font> method ব্যবহার করে memory size কমায়তে পারি। আমরা data-frame/ series যে কোন columns এর memory size reduse করতে astype() ব্যবহার করতে পারি । আমরা column define করে <font color="green"> .astype(similar_pandas_dtype) </font> ব্যবহার করব। pandas নিজে থেকেই memory reduse করে দিবা।
 
@@ -862,7 +862,7 @@ print(df.info())    # now memory usage: 41.2+ KB
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -875,7 +875,7 @@ print(df.info())    # now memory usage: 41.2+ KB
 
 
 
-###  ` filter A DataFrame Based On a Condition `
+##   filter A DataFrame Based On a Condition 
 
 pandas এ dataframe['columns'] =condition= value  দ্বারা condition check করা যায়। 
 
@@ -923,7 +923,7 @@ print(df[(df["Gender"] == "Male") & (df["Senior Management"])])
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -936,7 +936,7 @@ print(df[(df["Gender"] == "Male") & (df["Senior Management"])])
 
 
 
-###  ` .isin()  Method: `
+##   .isin()  Method: 
 
 single condition এ multiple value compare এ <font color="green"> .isin() </font> method ব্যবহার করা হয়। যদি আমার একাধিক ভালু একটা same condition এ chack করতে বা check করে new data-frame বানাতে চাই তা হইলে <font color="green"> data-frame["columnName].isin("[value1", "value2", "value3"]) </font> দ্বারা data-frame এর specific-column এ [value] গুলো আছে কি না তা boolean type দ্বারা জানা যায় আর চাইলে new data-frame এ convert করা যায়। 
 
@@ -970,7 +970,7 @@ print(df[teamm])
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -982,7 +982,7 @@ print(df[teamm])
 
 
 
-###  ` .isnull()  and   .notnull()  methods : `
+##   .isnull()  and   .notnull()  methods : 
 
 isnull এবং notnull ব্যবহার করা হয় nullবা Nan value filter ও pre-process এর জন্য। 
 
@@ -1027,7 +1027,7 @@ print(not_null_dfram)
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1039,7 +1039,7 @@ print(not_null_dfram)
 
 
 
-###  ` .between() method : `
+##   .between() method : 
 
 আমরা যদি নির্দিষ্ট কোন column এর নিদিষ্ট range এর মধ্যকার data নিয়ে কোন data-frame বানাইতে চাই টা হইলে .between() method ব্যবহার করা যায়। .between() method এর ২ টা parameter আছে। start আর end .between function এ (start,end) value define করে দিতে হয়। <font color="green"> dataframe["columnName"].between(start,end) </font>
 
@@ -1066,7 +1066,7 @@ print(df_sal)
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1078,7 +1078,7 @@ print(df_sal)
 
 
 
-###  ` .sort_values() method : `
+##   .sort_values() method : 
 
 আমরা data-frame এর যে কোন column এর value ascending order বা descending order এ sort করতে পারি। 
 
@@ -1103,7 +1103,7 @@ print(df.head(5))
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1116,7 +1116,7 @@ print(df.head(5))
 
 
 
-###  ` .duplicated() method: `
+##   .duplicated() method: 
 
 data-set এ অনেক column এ diplicate value থাকে। যদি আমরা duplicate value নিয়ে কাজ করতে চাই বা unique value বাহির করতে চাই। তা হইলে .duplicated() method ব্যবহার করা যায়। 
 
@@ -1161,7 +1161,7 @@ df[~df["First Name"].duplicated(keep = False)]      # ~ make reverse boolen data
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1173,7 +1173,7 @@ df[~df["First Name"].duplicated(keep = False)]      # ~ make reverse boolen data
 
 
 
-###  ` .drop_duplicates() method : `
+##   .drop_duplicates() method : 
 
 সাধারণত যদি একাধিক row এর সব value duplicate হয় তবে dataFrame.drop_duplicates() ব্যবহার করে Duplicate row টা বাদ দাওয়া যায়। 
 
@@ -1210,7 +1210,7 @@ print(df.head(5))
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1223,7 +1223,7 @@ print(df.head(5))
 
 
 
-### `.unique() and nunique() method :`
+##  .unique() and nunique() method :
 
 আমরা যদি data-frame এর কোন column এ কতগুলো unique value আছে তা জানতে চাই তা হইলে <font color="green"> dataframe["column"].unique() </font> ব্যবহার করে দেখতে পাই। 
 
@@ -1254,7 +1254,7 @@ df["Team"].nunique(dropna = False)
 
 ```
 
-#### output:
+#### `output`:
 
 ```
 
@@ -1265,9 +1265,8 @@ df["Team"].nunique(dropna = False)
 
 
 
-## dataframe III :
 
-###  `  .set_index() and .reset_index() methods  `
+###    .set_index() and .reset_index() methods  
 
 
 
