@@ -1,5 +1,9 @@
 #  DataFrame 
 
+
+[প্রয়োজনীয় data-set যা এই post এ ব্যবহার করা হয়েছে DOWNLOAD ](https://github.com/dust-nk-org/pandasDataSet/archive/master.zip)
+
+
 DataFrame একটি table বা 2D-array জাতীয় কাঠামো, যাতে প্রতিটি কলামে একটি variable এর মান থাকে এবং বেশ কিছু row তে প্রতিটি column থেকে মানগুলির একটি set থাকে। 
 
 
@@ -1267,6 +1271,817 @@ df["Team"].nunique(dropna = False)
 
 
 ###    .set_index() and .reset_index() methods  
+
+
+আমরা index_col= 'col_name' এর সঙ্ঘে আগে থেকেই পরিচিত। index_col parameter data-set read এর সময়ই ব্যবহার করা হয় এবং এই parameter দ্বারা আমরা data-set read এর সময় index-column select করে দিতে পারি। 
+
+আমরা যদি চাই যে আমরা index reset করে main data-set এর index এ convert হয়ে যাব তা হইলে আমরা  .set_index() ব্যবহার করতে পারি। .set_index আর index_col এর কাজ same. 
+`syntex` : <font color="green"> dataframe.set_index("columnName", inplace = True) </font>
+
+.reset_index() method এর drop parameter দ্বারা define করা হয় .set_index() এর দ্বারা create করা index টা data-frame এর একটা column হিসেবে থাকবে না কি remove করা হবে। drop=True ব্যবহার করা হইলে current index টা data-frame থেকে remove হয়ে যাবে আর drop=False ব্যবহার করলে current index টা একটা column হিসেবে add হইবে। 
+`syntex` : <font color="green"> dataframe.reset_index(drop = True, inplace = True) </font>  bydefaultly: drop=False. তাই আমরা drop না ডিফাইন করলে তা False থাকে। মানে current index টা একটা column এ convert হয়ে থাকে। 
+
+
+তাই index change করতে হইলে আগে reset index(drop=False) use করতে হবে না হইলে current index data-frame থেকে remove হয়ে যাবে।  
+
+
+
+
+```python
+
+
+import pandas as pd
+
+bond = pd.read_csv("jamesbond.csv")
+
+bond.set_index("Film", inplace = True)   # create index but other column are empty
+print(bond.head(3))
+
+bond.reset_index(drop = False)
+print(bond.head(3))
+
+
+bond.reset_index(drop = True)
+print(bond.head(3))
+
+bond.reset_index(drop = False, inplace= True)
+print(bond.head(3))
+
+"""
+first need to reset_index then make set_index unless set_index remove current index and replace by new
+"""
+
+bond.reset_index(inplace= True)
+bond.set_index("Year", inplace = True)
+print(bond.head(3))
+
+
+```
+
+#### `output`:
+
+```
+
+    try by self... ;)
+
+
+```
+
+
+
+
+
+
+## .loc[] &  .iloc[] methods: 
+
+*.loc[] function label নিয়ে কাজ করে এবং .iloc[] কাজ করে index নিয়ে ।  এছাড়া ২ function একই কাজ করে।*
+
+pandas এ Data-Frame sort করা উচিত। কারণ pandas যদি unstructured data পায় তা হইলে একটার পর একটা data check করে কিন্তু sorted বা structured data এর ক্ষেত্রে pandas data check এর ক্ষেত্রে jump করে specific data খোঁজে। তাই time & execution complexity কমে। 
+
+.loc[] & .iloc[] method এ () এর পরিবর্তে [] ব্যবহার করা হয়। Pandas এ extraction process এর জন্য [] ব্যবহার করা হয়। আমরা data-frame থেকে specific data বা columns extract এর জন্য [] করে থাকি। আমার মনে হয় pandas সেই একই process row extraction এ ও ব্যবহার করছে।  
+
+আমরা .loc["index_value"] ব্যবহার করে data-frame এ যদি index_value বলে কিছু থাকে তা হইলে ঐ value টার Series পাব। 
+
+আমরা [] এর মধ্যে range define করতে পারি  :  ব্যবহার করে। 
+অথবা multiple value ডিফাইন করতে পারি। <font color="green"> dataframe.loc["value_1" : "value_9"] </font>
+.loc[] alphabetically data check এবং execute করে। তাই range(:) এর condition এ বাপার তা লক্ষ রাখতে হবে। 
+
+
+<font color="green"> dataframe.loc["value_1", "value_3","value_9"] </font> এখন যে সব index এর মান value_1 বা value_3 বা value_9 টার সবকয়টা value নিয়ে একটা new data-frame পাওয়া যাবে। যদি কোন define করা value data-frame এ না থাকে তা হইলে new data-frame এ ঐ ভালু index এবং বাকি সব value Nan সহ একটা new row পাওয়া যাবে।  
+
+
+
+.loc[] দ্বারা index এবং .iloc[] সাধারণত index location কে represent করে থাকে।
+
+.loc[] এর ক্ষেত্রে আমাদের index_value Declare করতে হয়। কিন্তু .iloc[] এ index যদি string ও হয় তা হইলে ও আমরা index এর position declare করতে পারি বা String index এর ক্ষেত্রেও index position integer এ range define করতে পারি। যা .loc[] এ possible na।
+
+
+
+
+
+```python
+
+
+import pandas as pd
+
+bond = pd.read_csv("jamesbond.csv")
+bond.sort_index(inplace = True) # sort index alphabetically
+
+# .loc[]  work with label and .iloc[] work with index . otherwise both are same
+print(bond.loc[14])
+print(bond.iloc[14])
+
+# if index is string then use .iloc[] as numeric range if necessary 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True) # sort index alphabetically
+
+
+print(bond.loc["Casino Royale"])
+print(bond.loc["Casino Royale" : "Dr. No"])
+print(bond.loc["Dr. No" : "Casino Royale"]) # always check condition alphabetically
+
+
+
+print(bond.iloc[1:3])   # can be use on String index
+print(bond.iloc[[0,3]])
+
+
+
+```
+
+#### `output`:
+
+```
+
+    run every print function one by one 
+    try by self... ;)
+
+
+```
+
+
+
+
+
+
+
+
+##  .ix[] Method
+
+*.ix[] মূলত .loc[] & .iloc[] এর combination এ তৈরি।*
+
+আমরা .loc[] বা ,iloc[] এর যে কোন method এর বদল এ কোন রকম syntex পরিবর্তন না করেই .ix[] ব্যবহার করতে পারি। 
+
+অমি personally .ix[] method টা prefer করি। আপনে যদি .loc[] এ lebel এবং .iloc[] এ index এই সব ব্যবহার নিয়ে ঝামেলা মনে করেন টা হইলে .ix[] ব্যবহার করে .loc[] বা .iloc[] ২ structure এই data-frame থেকে value নিতে পারেন। 
+
+
+*NOTE: 'ix' pandas 1.0.0 থেকে remove করে দেওয়া হয়েছে , পূর্বের version গুলোতে কাজ করে। install previous version যদি .ix[] use করতে হয়। conda install pandas=0.25.1*
+
+
+
+
+
+```python
+
+
+
+import pandas as pd 
+
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True) # sort index alphabetically
+
+# .ix[] work same as .loc[] or .iloc[]
+bond.ix["GoldenEye"]
+bond.ix["A View to a Kill" : "The World Is Not Enough"]
+bond.ix[10:16]
+
+#if give single unknown value then face error
+#bond.ix["Sacred Bond"]  # cause Sacred Bond  not exist on data-frame
+bond.ix[["Sacred Bond", "Spectre" ]]   # make Nan row with index Sacred Bond
+
+
+# return boolen value, if exist then Yes else No
+"Spectre" in bond.index
+"Sacred Bond" in bond.index
+
+
+
+```
+
+#### `output`:
+
+```
+
+    try by self... ;)
+
+
+```
+
+
+
+
+## Second Argument to .loc[], .iloc[], and .ix[] Methods
+
+যদি উপরের .loc[] এবং .iloc[] এবং .ix[] method বুঝে থাকেন টা হইলে example দেখেই বুজতে পারবেন । আমরা উপরের single কাজ গুলো একত্রে করেছি । 
+
+
+
+
+
+```python
+
+
+import pandas as pd 
+
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True) # sort index alphabetically
+
+
+# .loc[row,column]
+print(bond.loc["Moonraker"])
+bond.loc["Moonraker", "Actor"]
+bond.loc["Moonraker", "Actor" : "Budget"]
+bond.loc["Moonraker", ["Actor" ,"Budget"]]
+
+
+bond.iloc[1]
+print(bond.iloc[1, 1])
+bond.iloc[1, 1:6]
+bond.iloc[1, [1 ,6]]
+
+
+```
+
+
+#### `output`:
+
+```
+    use print method to see every execution 
+
+    please run one by one
+
+    try by self... ;)
+
+
+```
+
+
+
+## Set New Values for a Specific Cell or Row
+
+আমরা যদি Data-Frame এর specific কোন কোন data change করতে চাই, তা হইলে just python list এর basic consept আর pandas এর .loc[] বা .iloc[] কিংবা .ix[] ব্যবহার করলে ই হবে। 
+
+আমরা .loc[] বা .iloc[] কিংবা .ix[] ব্যবহার করে specific data pick করব  যে data টা change করার দরকার। then just assign operator(=) ব্যবহার করে new data add করব। 
+
+
+<font color="green"> define dataframe.loc[series, index] = new_Value </font>
+
+
+
+```python
+
+
+import pandas as pd 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+# using .ix[] function
+print(bond.ix["Dr. No"])
+bond.ix["Dr. No", "Actor"] = "Sir Sean Connery"
+
+# using .loc[] function 
+print(bond.loc["Dr. No"])
+
+bond.loc["Dr. No", "Actor"] = "Sir Sean Connery"
+print(bond.loc["Dr. No"])
+
+
+bond.loc["Dr. No", ["Box Office", "Budget", "Bond Actor Salary"]] = [448800000, 7000000, 600000]
+print(bond.loc["Dr. No"])
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+
+
+```
+
+
+
+
+## Set Multiple Values in DataFrame
+
+আমরা data-frame থেকে multiple ভালু এর Series বা new_dataframe pick করে তাতে specific value change করতে পারি। এর ফলে একটা change এর দ্বারা অনেক row তে change আনা যায়। 
+
+<font color="green"> define dataframe.loc[new_dataframe_with_specific_value, index] = new_Value </font>
+
+
+
+```python
+
+
+import pandas as pd 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")  # make "Film" as index
+bond.sort_index(inplace = True)   # sort alphabetically 
+print(bond.head(3))
+
+mask = bond["Actor"] == "Sean Connery"  # make a nwe_dataframe with actor as "Sean Connery"
+df2 = bond[mask]   
+print(df2)
+
+df2["Actor"] = "Sir Sean Connery"
+print(df2)
+
+# or  
+bond.loc[mask,"Actor"] = "Sir Sean Connery"
+print(bond)
+
+bond[bond["Actor"] == "Roger Moore"]
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+
+
+```
+
+
+
+
+
+## Rename Index Labels or Columns in a DataFrame
+
+আমরা <font color="green">  data-frame.rename(columns= {"old_name" : "new_name "}) </font> ব্যবহার করে column অথবা <font color="green">  data-frame.rename(index= {"old_name" : "new_name "}) </font> ব্যবহার করে dataframe এর যে কোন row বা index এর নাম change করতে পারি। 
+
+আমরা dictionary আকারে value inseart করে data update করতে পারি। 
+
+*.rename() এ inplace paramiter আছে ।*
+
+
+
+```python
+
+
+
+import pandas as pd 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+# rename column
+bond.rename(columns = {"Year": "Release Date", "Box Office": "Revenue"}, inplace = True)
+print(bond.head(1))
+
+# rename index
+bond.rename(index = {"Dr. No": "Doctor No", 
+                     "GoldenEye": "Golden Eye",
+                     "The World Is Not Enough": "Best Bond Movie"}, inplace = True)
+
+print(bond.head(10))
+bond.ix["Best Bond Movie"]
+
+# or we can change columns name by
+bond.columns = ["Year", "Hero", "Director", "Gross", "cost", "salary"]
+print(bond.head(3))
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+
+
+```
+
+
+
+## Delete Rows or Columns in a DataFrame 
+
+আমরা <font color="green"> data-frame.drop(index = "Row_name",inplace = True) </font> ব্যবহার করে row এবং <font color="green">  data-frame.drop(labels = "column_name",inplace = True) </font> ব্যবহার করে column কে Data-frame থেকে remove করতে পারি। 
+
+আমরা যদি কোন column এর Data cut করে new কোন Data inseart করতে চাই তা হইলে <font color="green"> data-frame.pop("name") </font> ব্যবহার করে specific column name এর Series পাইতে পারি। 
+
+তা ছাড়া আমরা <font color="green"> del dataframe["column_name"] </font>  ব্যবহার করে data-frame থেকে column remove করতে পারি।   
+
+
+
+
+
+```python
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+# drop rows
+bond.drop(index = "Casino Royale",inplace = True)
+print(bond.head(3))
+
+# drop columns
+d2 = bond.drop(labels = ["Year", "Director"], axis= "columns",inplace = True)
+print(d2)
+print(bond.head(3))
+
+
+# cut columns and insert to another variable
+hero = bond.pop("Actor")
+print(hero)
+
+# delete column permanentlly by del keyword
+del bond["Director"]
+print(bond.head(3))
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+
+
+```
+
+
+
+
+
+# Create Random Sample
+
+বেশির ভাগ সময় data-set এ বিপুল পরিমাণ sample data থাকে বা প্রয়োজন এর অতিরিক্ত label থাকে । 
+
+আমরা <font color="green"> data-frame.sample() </font> ব্যবহার করে সমস্ত data-frame এর নির্দিষ্ট কিছু data sample নিয়ে train বা test করতে পারি। আমরা .sample(n) এ n = (যে কোন numerical value) ব্যবহার করে সমস্ত data-frame থেকে randomly n সংখ্যক index এর data নিতে পারি। 
+
+এ ছাড়া .sample(frac ) এ আমরা specific % data এর floating value define করে দিতে পারি। যার ফলে সমস্ত data থেকে ঐ নির্দিষ্ট শতাংশ data নিয়ে test বা train করতে পারি। 
+
+আমরা .sample(n , axis = "columns") ব্যবহার করে column থেকে sampling করতে পারি। 
+
+
+
+
+
+
+
+```python
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond)
+
+bond.sample(n = 6)  # give 6 random rows from bond
+
+bond.sample(frac = .25) # give 25% of number from bond 
+
+bond.sample(n = 3, axis = "columns") # give 3 random columns from bond
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+# The .nsmallest() and .nlargest() methods
+
+আমরা data-frame থেকে index অনুযায়ী যে কোন পরিমাণ এর সবথেকে বড় data  <font color="green"> data-frame.nlargest() </font>  এবং সবথেকে ছোট data <font color="green"> data-frame.nsmallest() </font> function ব্যবহার করে নিতে পারি। 
+
+
+
+
+```python
+
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond)
+
+# we can sort by
+bond.sort_values("Year", ascending = False).head(3)
+# or using .nlargest()
+bond.nlargest(n=3, columns = "Year")
+
+
+# we can sort by
+bond.sort_values("Year", ascending = True).head(3)
+# or using .nlargest()
+bond.nsmallest(n=3, columns = "Year")
+#or
+bond["Year"].nsmallest(2)
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+
+# Filtering with the where Method
+
+data-frame থেকে data filter এর জন্য যদি নির্দিষ্ট কোন condition অনুযায়ী data pick করতে হইলে <font color="green"> data-frame.where(data-frame["column-name"] ~condition~ n ) </font> ব্যবহার করা যায়। 
+
+
+
+
+
+```python
+
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+mask = bond["Actor"] == "Sean Connery"
+bond[mask]
+
+b = bond.where(mask)
+
+# same as
+b2 = bond.where(bond["Box Office"] > 800)
+
+b3 = bond.where(bond["Year"] > 2000)
+
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+
+# The .query() method 
+
+
+* .query() method only string argument এর জন্য কাজ করে। 
+* data-frame এর column এর নাম এ যদি কোন spece না থাকে তা হইলে .query() method কাজ করে।
+
+
+আমরা .query() method এ single বা multiple condition ব্যবহার করতে পারি। 
+
+.query() অনেকটা search operation এর মত কিন্তু সাধারণ operation এর থেকে প্রায় ১০ গুন বেশি faster. 
+
+
+
+
+
+
+```python
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+# using list comprehention to replace data for reduse spaces 
+bond.columns = [column_name.replace(" ", "_") for column_name in bond.columns]
+bond.head(1)
+
+# using .query()
+bond.query("Actor == 'Sean Connery'")
+
+ad = bond.query("Actor == 'Sean Connery' or Director == 'John Glen'")
+
+add = bond.query("Actor not in ['Sean Connery', 'Roger Moore']")
+print(add)
+
+
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+
+# .apply() Method on Single Columns
+
+
+data-frame এর কোন single column নিয়ে কাজ করা মানে data-frame থেকে একটা Series নিয়ে কাজ করা। 
+
+.apply() method ব্যবহার করা হয় condition বা operation এর পর, যার দ্বারা change টা সমস্ত data তে execute হয়। 
+
+
+
+
+
+
+```python
+
+
+
+import pandas as pd
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+def convert_to_String_and_add_millions(number):
+    return str(number) + "MILLIONS"
+
+bond["Box Office"] = bond["Box Office"].apply(convert_to_String_and_add_millions)
+print(bond["Box Office"])
+
+# convert multiple rows with specific value by
+columns = ["Budget","Bond Actor Salary"]
+for col in columns:
+    bond[col] = bond[col].apply(convert_to_String_and_add_millions)
+
+print(bond[col])
+
+
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+    please run one by one
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+
+# .apply() Method with Row Values
+
+
+আমরা যদি data-frame থেকে classification বাহির করতে চাই। বা specific row দ্বারা আলাদা data-frame বাহির করতে চাই, তা হইলে ও <font color="green"> data-frame.apply(operation, axis) </font> ব্যবহার করা হয়। 
+
+আমরা একটি example এ actor আর budget এর উপর ভিত্তি করে movies category বানাব। 
+
+
+
+
+
+
+```python
+
+
+import pandas as pd 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+def good_movie(row):
+    
+    actor = row[1]
+    budget = row[4]
+    
+    if actor == "Pierce Brosnan":
+        return "The Best"
+    elif actor == "Roger Moore" and budget > 40:
+        return "Enjoyable"
+    else:
+        return "I have no clue"
+
+bond.apply(good_movie, axis = "columns")
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
+
+
+
+
+
+# .copy() Method 
+
+আমরা data-frame নিয়ে অনেক operation করে থাকি। আবার data-frame এ ও অনেক পরিবর্তন করে থাকি। যদি কখনও আমরা data-frame এর কোন পরিবর্তন আনি কিন্তু তা যেন main data-frame এ কোন পরিবর্তন না করে এমন কিছু করতে চাই, তা হইলে আমরা <font color="green"> .copy()  </font> method ব্যবহার করে data-frame এর যে কোন part অন্য variable এ copy করে নিয়ে তা ব্যবহার করতে পারি। 
+
+
+
+
+
+
+```python
+
+import pandas as pd 
+bond = pd.read_csv("jamesbond.csv", index_col ="Film")
+bond.sort_index(inplace = True)
+print(bond.head(3))
+
+directors = bond["Director"].copy()
+directors.head(3)
+
+
+
+```
+
+
+#### `output`:
+
+```
+
+
+    try by self... ;)
+    
+    or comment for discussion .......
+
+
+```
 
 
 
