@@ -1,5 +1,10 @@
 
 # Pandas
+
+[প্রয়োজনীয় data-set যা এই post এ ব্যবহার করা হয়েছে DOWNLOAD ](https://github.com/dust-nk-org/pandasDataSet/archive/master.zip)
+
+
+
 Pandas একটি পাইথন প্যাকেজ যা "রিলেশনাল" বা "লেবেলযুক্ত" ডেটা সহজ এবং স্বজ্ঞামূলকতার সঙ্গে কাজ করার জন্য fast, flexible, এবং expressive ডাটা স্ট্রাকচার প্রদান করে। python প্রোগ্রামিং  এ real-world ডাটা analysis এর জন্য high-level building block বা structured data তৈরিতে pandas খুবই গুরুত্বপূর্ণ। pandas একটি open-source পাইথন package.
 
 পান্ডাস বিভিন্ন ধরণের ডেটার জন্য বেশ উপযোগী:
